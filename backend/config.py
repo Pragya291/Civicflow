@@ -3,8 +3,8 @@ import os
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
 class Config:
-    SECRET_KEY = os.environ.get('SECRET_KEY', 'mbmc-pothole-governance-secret-key-2025')
-    JWT_SECRET_KEY = os.environ.get('JWT_SECRET_KEY', 'mbmc-jwt-super-secret-key-2025')
+    SECRET_KEY = os.environ.get('SECRET_KEY', 'mbmc-pothole-governance-secret-key-production-ready-2025')
+    JWT_SECRET_KEY = os.environ.get('JWT_SECRET_KEY', 'mbmc-jwt-super-secret-key-production-ready-secure-tokens-2025')
     
     # SQLite Database inside backend/database folder
     DATABASE_PATH = os.path.join(BASE_DIR, 'database', 'pothole_governance.db')

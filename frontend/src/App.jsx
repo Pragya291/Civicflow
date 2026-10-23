@@ -51,6 +51,16 @@ export default function App() {
               } 
             />
             <Route 
+              path="/register" 
+              element={
+                user ? (
+                  <Navigate to={user.role === 'admin' ? '/admin' : '/'} replace />
+                ) : (
+                  <LoginPage onLoginSuccess={handleLoginSuccess} initialRegister={true} />
+                )
+              } 
+            />
+            <Route 
               path="/admin" 
               element={<AdminDashboardPage user={user} />} 
             />

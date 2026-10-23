@@ -3,8 +3,8 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { LogIn, UserPlus, Shield, User, AlertCircle, CheckCircle } from 'lucide-react';
 import { authService } from '../services/api';
 
-export default function LoginPage({ onLoginSuccess }) {
-  const [isRegister, setIsRegister] = useState(false);
+export default function LoginPage({ onLoginSuccess, initialRegister = false }) {
+  const [isRegister, setIsRegister] = useState(initialRegister);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
