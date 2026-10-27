@@ -8,13 +8,24 @@ L.Icon.Default.mergeOptions({
   shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
 });
 
-// Custom colored SVG pin markers for Pothole statuses
-export const createCustomMarker = (status = 'Pending') => {
-  let color = '#d97706'; // Amber for Pending
-  if (status === 'In Progress') {
-    color = '#2563eb'; // Blue for In Progress
-  } else if (status === 'Resolved') {
-    color = '#16a34a'; // Green for Resolved
+// Custom colored SVG pin markers for Pothole statuses:
+// Green #2E7D32 for Resolved, Amber #F9A825 for Pending, Blue #1565C0 for In Progress, Red #D32F2F for Critical
+export const createCustomMarker = (status = 'Pending', severity = '') => {
+  let color = '#F9A825'; // Warning/Pending: Amber #F9A825
+
+  if (
+    status === 'Critical' || 
+    severity === 'High' || 
+    severity === 'Critical' || 
+    status === 'high_severity'
+  ) {
+    color = '#D32F2F'; // Error/Critical: Red #D32F2F
+  } else if (status === 'In Progress' || status === 'in_progress') {
+    color = '#1565C0'; // In Progress: Deep Blue #1565C0
+  } else if (status === 'Resolved' || status === 'resolved') {
+    color = '#2E7D32'; // Success/Resolved: Green #2E7D32
+  } else if (status === 'Pending' || status === 'pending') {
+    color = '#F9A825'; // Warning/Pending: Amber #F9A825
   }
 
   const svgIcon = `

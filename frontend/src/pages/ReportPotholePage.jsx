@@ -144,8 +144,8 @@ export default function ReportPotholePage({ user }) {
   if (submittedComplaint) {
     return (
       <div className="page-container" style={{ maxWidth: '650px', paddingTop: '3rem' }}>
-        <div className="card" style={{ borderTop: '5px solid #16a34a', textAlign: 'center', padding: '2.5rem 2rem' }}>
-          <div style={{ width: '64px', height: '64px', background: '#dcfce7', color: '#16a34a', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.25rem' }}>
+        <div className="card" style={{ borderTop: '5px solid #2E7D32', textAlign: 'center', padding: '2.5rem 2rem' }}>
+          <div style={{ width: '64px', height: '64px', background: '#E8F5E9', color: '#2E7D32', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.25rem' }}>
             <CheckCircle2 size={36} />
           </div>
 
@@ -154,7 +154,7 @@ export default function ReportPotholePage({ user }) {
             Your grievance has been officially logged with Mira-Bhayandar Municipal Corporation and queued for engineering inspection.
           </p>
 
-          <div style={{ background: '#f8fafc', border: '2px dashed #93c5fd', borderRadius: 'var(--radius-lg)', padding: '1.5rem', marginBottom: '2rem' }}>
+          <div style={{ background: '#F5F7FA', border: '2px dashed #90CAF9', borderRadius: 'var(--radius-lg)', padding: '1.5rem', marginBottom: '2rem' }}>
             <span style={{ fontSize: '0.82rem', textTransform: 'uppercase', letterSpacing: '0.05em', color: '#64748b', fontWeight: 700 }}>
               Official Complaint Reference ID
             </span>
@@ -319,7 +319,7 @@ export default function ReportPotholePage({ user }) {
               <button
                 type="submit"
                 disabled={submitting}
-                className="btn btn-primary btn-lg"
+                className="btn btn-accent btn-lg"
                 style={{ width: '100%', marginTop: '1rem' }}
               >
                 {submitting ? 'Submitting Report...' : 'Submit Pothole Complaint'}
@@ -341,7 +341,7 @@ export default function ReportPotholePage({ user }) {
             </div>
             <div className="card-body">
               <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '0.75rem' }}>
-                <MapPin size={14} style={{ display: 'inline', color: '#dc2626' }} /> Click anywhere on the map to pin the exact pothole spot:
+                <MapPin size={14} style={{ display: 'inline', color: '#D32F2F' }} /> Click anywhere on the map to pin the exact pothole spot:
               </p>
 
               {/* Quick Presets for Demo */}

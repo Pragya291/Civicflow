@@ -43,7 +43,7 @@ export default function Navbar({ user, onLogout }) {
               </NavLink>
             </li>
             <li>
-              <NavLink to="/report" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
+              <NavLink to="/report" className={({ isActive }) => `nav-link nav-link-report ${isActive ? 'active' : ''}`}>
                 <PlusCircle size={17} /> Report Pothole
               </NavLink>
             </li>

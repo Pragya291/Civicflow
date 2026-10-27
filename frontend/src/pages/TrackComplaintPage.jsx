@@ -250,7 +250,7 @@ export default function TrackComplaintPage({ user }) {
                     Location & Coordinates
                   </h5>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.92rem', color: '#334155' }}>
-                    <MapPin size={16} style={{ color: '#2563eb', flexShrink: 0 }} />
+                    <MapPin size={16} style={{ color: '#1565C0', flexShrink: 0 }} />
                     <span>{complaint.location_name}</span>
                   </div>
                   <div style={{ fontSize: '0.8rem', color: '#64748b', marginLeft: '1.4rem' }}>
@@ -263,7 +263,7 @@ export default function TrackComplaintPage({ user }) {
                     <h5 style={{ fontSize: '0.85rem', color: 'var(--text-muted)', textTransform: 'uppercase', marginBottom: '0.25rem' }}>
                       Assigned Department
                     </h5>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.9rem', fontWeight: 600, color: complaint.assigned_department === 'Not Assigned' ? '#d97706' : '#1e40af' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.9rem', fontWeight: 600, color: complaint.assigned_department === 'Not Assigned' ? '#F9A825' : '#1565C0' }}>
                       <Building2 size={16} />
                       <span>{complaint.assigned_department}</span>
                     </div>

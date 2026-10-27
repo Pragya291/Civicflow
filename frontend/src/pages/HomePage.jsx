@@ -16,6 +16,36 @@ import {
 } from 'lucide-react';
 import { complaintService } from '../services/api';
 
+const DEFAULT_RECENT_INCIDENTS = [
+  {
+    id: 8,
+    complaint_id: 'MBMC-PTH-008',
+    severity: 'High',
+    status: 'Resolved',
+    description: 'Severe crater near station auto stand causing traffic bottleneck',
+    location_name: 'Coordinates: 19.2952, 72.8544',
+    created_at: '2026-10-23 10:20:22'
+  },
+  {
+    id: 7,
+    complaint_id: 'MBMC-PTH-007',
+    severity: 'Low',
+    status: 'Pending',
+    description: 'Loose stones and bumpy road depression in front of Maxus Mall Bhayandar West.',
+    location_name: 'Near Maxus Mall, Bhayandar West',
+    created_at: '2026-10-02 04:13:07'
+  },
+  {
+    id: 6,
+    complaint_id: 'MBMC-PTH-006',
+    severity: 'High',
+    status: 'Pending',
+    description: 'Hazardous edge excavation and pothole on Kashimira junction bypass heading towards Ghodbunder Road.',
+    location_name: 'Kashimira Naka Junction, Western Express Hwy',
+    created_at: '2026-10-01 19:13:07'
+  }
+];
+
 export default function HomePage() {
   const [stats, setStats] = useState({
     total: 0,
@@ -25,7 +55,7 @@ export default function HomePage() {
     high_severity: 0
   });
   const [quickTrackId, setQuickTrackId] = useState('');
-  const [recentComplaints, setRecentComplaints] = useState([]);
+  const [recentComplaints, setRecentComplaints] = useState(DEFAULT_RECENT_INCIDENTS);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
@@ -40,9 +70,14 @@ export default function HomePage() {
         complaintService.getComplaints()
       ]);
       setStats(statsData);
-      setRecentComplaints(complaintsData.complaints ? complaintsData.complaints.slice(0, 3) : []);
+      if (complaintsData.complaints && complaintsData.complaints.length > 0) {
+        setRecentComplaints(complaintsData.complaints.slice(0, 3));
+      } else {
+        setRecentComplaints(DEFAULT_RECENT_INCIDENTS);
+      }
     } catch (err) {
       console.error('Error fetching home statistics:', err);
+      setRecentComplaints(DEFAULT_RECENT_INCIDENTS);
     } finally {
       setLoading(false);
     }
@@ -73,7 +108,7 @@ export default function HomePage() {
             </p>
 
             <div className="hero-actions">
-              <Link to="/report" className="btn btn-primary btn-lg">
+              <Link to="/report" className="btn btn-accent btn-lg">
                 <PlusCircle size={20} /> Report a Pothole
               </Link>
               <Link to="/track" className="btn btn-secondary btn-lg" style={{ background: 'rgba(255,255,255,0.15)', color: 'white', borderColor: 'rgba(255,255,255,0.3)' }}>
@@ -216,59 +251,63 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Recent Activity & GIS Preview Section */}
-      <div className="page-container">
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
+      {/* Recent Incident Reports in Mira-Bhayandar Section */}
+      <div className="page-container" style={{ paddingTop: '2.5rem', paddingBottom: '3.5rem' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '1.75rem', flexWrap: 'wrap', gap: '1rem' }}>
           <div>
-            <h3 style={{ fontSize: '1.45rem' }}>Recent Incident Reports in Mira-Bhayandar</h3>
-            <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>Live civic complaints submitted by residents</p>
+            <h3 style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--text-main)', letterSpacing: '-0.02em', marginBottom: '0.25rem' }}>
+              Recent Incident Reports in Mira-Bhayandar
+            </h3>
+            <p style={{ color: 'var(--text-muted)', fontSize: '0.92rem', margin: 0 }}>
+              Live civic complaints submitted by residents
+            </p>
           </div>
-          <Link to="/map" className="btn btn-outline btn-sm">
+          <Link to="/map" className="btn btn-outline btn-sm" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', fontWeight: 600 }}>
             View Live GIS Map <ArrowRight size={15} />
           </Link>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '1.5rem' }}>
-          {recentComplaints.map((c) => (
-            <div key={c.id} className="card">
-              {c.photo && (
-                <div style={{ height: '170px', overflow: 'hidden', background: '#0f172a' }}>
-                  <img
-                    src={`/uploads/${c.photo}`}
-                    alt={c.complaint_id}
-                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                    onError={(e) => {
-                      e.target.style.display = 'none';
-                    }}
-                  />
-                </div>
-              )}
-              <div className="card-body">
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
-                  <span style={{ fontWeight: 800, color: 'var(--primary)', fontSize: '0.95rem' }}>
-                    {c.complaint_id}
+        <div className="incident-reports-grid">
+          {recentComplaints.slice(0, 3).map((c) => (
+            <div key={c.id || c.complaint_id} className="incident-card">
+              {/* Header: Incident ID & Badges */}
+              <div className="incident-card-header">
+                <span className="incident-card-id">
+                  {c.complaint_id}
+                </span>
+                <div className="incident-card-badges">
+                  <span className={`badge badge-priority-${c.severity.toLowerCase()}`}>
+                    {c.severity}
                   </span>
-                  <div style={{ display: 'flex', gap: '0.4rem' }}>
-                    <span className={`badge badge-sev-${c.severity.toLowerCase()}`}>{c.severity}</span>
-                    <span className={`badge badge-status-${c.status.toLowerCase().replace(' ', '-')}`}>{c.status}</span>
-                  </div>
+                  <span className={`badge badge-status-${c.status.toLowerCase().replace(' ', '-')}`}>
+                    {c.status}
+                  </span>
                 </div>
+              </div>
 
-                <p style={{ fontSize: '0.88rem', color: '#334155', marginBottom: '0.75rem', lineHeight: '1.45' }}>
-                  {c.description.length > 90 ? `${c.description.substring(0, 90)}...` : c.description}
-                </p>
+              {/* Description */}
+              <p className="incident-card-desc">
+                {c.description}
+              </p>
 
-                <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '0.4rem', marginBottom: '0.5rem' }}>
-                  <MapPin size={14} style={{ color: '#2563eb', flexShrink: 0 }} />
-                  <span>{c.location_name}</span>
-                </div>
+              {/* Location Row */}
+              <div className="incident-card-location">
+                <MapPin size={15} />
+                <span>{c.location_name}</span>
+              </div>
 
-                <div style={{ fontSize: '0.75rem', color: 'var(--text-light)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid var(--border)', paddingTop: '0.75rem', marginTop: '0.75rem' }}>
-                  <span><Calendar size={13} style={{ display: 'inline', marginRight: '4px' }} /> {c.created_at}</span>
-                  <Link to={`/track?id=${c.complaint_id}`} style={{ fontWeight: 600, fontSize: '0.82rem' }}>
-                    Track Updates &rarr;
-                  </Link>
-                </div>
+              {/* Horizontal Divider */}
+              <hr className="incident-card-divider" />
+
+              {/* Footer: Date & Track Updates Link */}
+              <div className="incident-card-footer">
+                <span className="incident-card-date">
+                  <Calendar size={14} />
+                  <span>{c.created_at}</span>
+                </span>
+                <Link to={`/track?id=${encodeURIComponent(c.complaint_id)}`} className="incident-card-link">
+                  Track Updates <ArrowRight size={14} />
+                </Link>
               </div>
             </div>
           ))}

@@ -25,7 +25,7 @@ export default function MapView({
           <Marker
             key={marker.id || marker.complaint_id}
             position={[marker.latitude, marker.longitude]}
-            icon={createCustomMarker(marker.status)}
+            icon={createCustomMarker(marker.status, marker.severity)}
             eventHandlers={{
               click: () => onMarkerClick && onMarkerClick(marker)
             }}

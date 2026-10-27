@@ -114,7 +114,7 @@ export default function LoginPage({ onLoginSuccess, initialRegister = false }) {
                 className="btn btn-secondary btn-sm"
                 style={{ fontSize: '0.78rem', padding: '0.3rem 0.6rem' }}
               >
-                <Shield size={13} style={{ color: '#dc2626' }} /> Fill Admin
+                <Shield size={13} style={{ color: '#D32F2F' }} /> Fill Admin
               </button>
               <button 
                 type="button" 
@@ -122,7 +122,7 @@ export default function LoginPage({ onLoginSuccess, initialRegister = false }) {
                 className="btn btn-secondary btn-sm"
                 style={{ fontSize: '0.78rem', padding: '0.3rem 0.6rem' }}
               >
-                <User size={13} style={{ color: '#2563eb' }} /> Fill Citizen
+                <User size={13} style={{ color: '#1565C0' }} /> Fill Citizen
               </button>
             </div>
           </div>

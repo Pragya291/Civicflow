@@ -51,16 +51,19 @@ export default function PotholeMapPage() {
         </div>
 
         {/* Legend */}
-        <div style={{ display: 'flex', gap: '0.8rem', background: 'white', padding: '0.5rem 1rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border)', fontSize: '0.82rem', alignItems: 'center' }}>
+        <div style={{ display: 'flex', gap: '0.8rem', background: 'white', padding: '0.5rem 1rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border)', fontSize: '0.82rem', alignItems: 'center', flexWrap: 'wrap' }}>
           <span style={{ fontWeight: 700, color: 'var(--text-muted)' }}>Status Legend:</span>
           <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-            <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#d97706', display: 'inline-block' }} /> Pending
+            <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#F9A825', display: 'inline-block' }} /> Pending
           </span>
           <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-            <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#2563eb', display: 'inline-block' }} /> In Progress
+            <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#1565C0', display: 'inline-block' }} /> In Progress
           </span>
           <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-            <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#16a34a', display: 'inline-block' }} /> Resolved
+            <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#2E7D32', display: 'inline-block' }} /> Resolved
+          </span>
+          <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+            <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#D32F2F', display: 'inline-block' }} /> Critical
           </span>
         </div>
       </div>
@@ -127,7 +130,7 @@ export default function PotholeMapPage() {
             <Marker
               key={marker.id}
               position={[marker.latitude, marker.longitude]}
-              icon={createCustomMarker(marker.status)}
+              icon={createCustomMarker(marker.status, marker.severity)}
             >
               <Popup>
                 <div className="map-popup-card">
@@ -154,7 +157,7 @@ export default function PotholeMapPage() {
                   </p>
 
                   <div style={{ marginBottom: '0.4rem', fontSize: '0.78rem', color: '#334155' }}>
-                    <MapPin size={13} style={{ display: 'inline', color: '#dc2626', marginRight: '3px' }} />
+                    <MapPin size={13} style={{ display: 'inline', color: '#D32F2F', marginRight: '3px' }} />
                     <strong>{marker.location_name}</strong>
                   </div>
 

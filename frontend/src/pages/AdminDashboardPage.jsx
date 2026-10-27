@@ -182,7 +182,7 @@ export default function AdminDashboardPage({ user }) {
     datasets: [
       {
         data: [stats.pending || 0, stats.in_progress || 0, stats.resolved || 0],
-        backgroundColor: ['#d97706', '#2563eb', '#16a34a'],
+        backgroundColor: ['#F9A825', '#1565C0', '#2E7D32'],
         borderWidth: 2,
         borderColor: '#ffffff',
       },
@@ -196,7 +196,7 @@ export default function AdminDashboardPage({ user }) {
       {
         label: 'Complaint Count',
         data: [stats.high_severity || 0, stats.medium_severity || 0, stats.low_severity || 0],
-        backgroundColor: ['#dc2626', '#ea580c', '#0284c7'],
+        backgroundColor: ['#D32F2F', '#FF9800', '#42A5F5'],
         borderRadius: 6,
       },
     ],
@@ -448,7 +448,7 @@ export default function AdminDashboardPage({ user }) {
                     </select>
                   </td>
                   <td>
-                    <span style={{ fontSize: '0.84rem', fontWeight: 600, color: c.assigned_department === 'Not Assigned' ? '#d97706' : '#1e40af' }}>
+                    <span style={{ fontSize: '0.84rem', fontWeight: 600, color: c.assigned_department === 'Not Assigned' ? '#F9A825' : '#1565C0' }}>
                       {c.assigned_department}
                     </span>
                   </td>
@@ -479,7 +479,7 @@ export default function AdminDashboardPage({ user }) {
                       <button
                         onClick={() => handleDeleteComplaint(c.id, c.complaint_id)}
                         className="btn btn-secondary btn-sm"
-                        style={{ color: '#dc2626' }}
+                        style={{ color: '#D32F2F' }}
                         title="Delete Invalid Report"
                       >
                         <Trash2 size={14} />
